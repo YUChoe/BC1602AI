@@ -1,4 +1,5 @@
 import serial
+from binascii import hexlify, unhexlify
 
 class LCDControl():
     def __init__(self):
@@ -16,7 +17,7 @@ class LCDControl():
 
         for c in str:
             data = prefix + hex(ord(c)).replace('0x', '')
-            self._s.write(data.decode('hex'))
+            self._s.write( unhexlify(data) )
         self._s.flush()
 
     def close(self):
